@@ -12,11 +12,7 @@ namespace BST
         public Node(int item)
         {
             key = item;
-            left = right = null;
         }
-        public override string ToString()
-        {
-            return "element" + " " + right.key + " " + left.key + " " + left.left.key;
-        }
+
     }
 }
