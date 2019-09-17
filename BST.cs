@@ -19,6 +19,11 @@ namespace BST
             return this.root;
         }
 
+        public void SetRoot(Node NewRoot)
+        {
+            this.root = NewRoot;
+        }
+
         public void Insert(int key)
         {
             root = InsertRec(root, key);
@@ -39,6 +44,47 @@ namespace BST
                 root.right = InsertRec(root.right, key);
 
             return root;
+        }
+
+        private void StoreBalancedBSTNodes(Node root, List<Node> nodes)
+        {
+
+            if (root == null)
+            {
+                return;
+            }
+
+            StoreBalancedBSTNodes(root.left, nodes);
+            nodes.Add(root);
+            StoreBalancedBSTNodes(root.right, nodes);
+        }
+
+        private Node AddBalancedTreeNode(List<Node> nodes, int start, int end)
+        {
+            if (start > end)
+            {
+                return null;
+            }
+
+            int mid = (start + end) / 2;//Here we find median of Node keys
+            Node node = nodes[mid];
+
+            node.left = AddBalancedTreeNode(nodes, start, mid - 1);
+            node.right = AddBalancedTreeNode(nodes, mid + 1, end);
+
+            return node;
+        }
+
+        public void BalanceTree(Node root = null)
+        {
+            root = root == null ? this.root : root;//default root to balance is current root
+
+            List<Node> nodes = new List<Node>();
+            StoreBalancedBSTNodes(root, nodes);
+
+            int n = nodes.Count;
+
+            SetRoot(AddBalancedTreeNode(nodes, 0, n - 1));
         }
 
         public void Inorder()

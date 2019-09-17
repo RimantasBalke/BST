@@ -6,7 +6,7 @@ namespace BST
     {
         static void Main(string[] args)
         {
-            int[] data = new int[100];
+            int[] data = new int[10];
 
             Random randNum = new Random();
             for (int i = 0; i < data.Length; i++)
@@ -29,10 +29,20 @@ namespace BST
             Console.WriteLine("Press any key to traverse right");
             Console.ReadLine();
             bts.TraverseRight();
+            Console.WriteLine("Press any key to balance");
+            Console.ReadLine();
+            bts.BalanceTree();
+            bts.Inorder();
+            Console.WriteLine("Root element is :" + bts.GetRoot().key);
+            bts.TraverseLeft();
+            Console.WriteLine("traversed left");
+            bts.TraverseRight();
+            Console.WriteLine("traversed right");
+            Console.ReadLine();
             Console.WriteLine("Write node value which you want to delete");
-            string number= Console.ReadLine();
+            string number = Console.ReadLine();
             int value = Int32.Parse(number);
-            bts.DeleteNodeByValue(bts.GetRoot(),value);
+            bts.DeleteNodeByValue(bts.GetRoot(), value);
             bts.Inorder();
             Console.WriteLine("Press any key to exit");
             bts.DeleteBinarySearchTree();
